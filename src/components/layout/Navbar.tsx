@@ -1,4 +1,5 @@
 // import Logo from "@/assets/Logo";
+import { Link } from "react-router";
 import logo from "../../assets/hot-air-balloon-svgrepo-com.svg";
 
 const Navbar = () => {
@@ -8,6 +9,8 @@ const Navbar = () => {
         <img src={logo} alt="" className="h-10" />
         <span className="font-bold py-3 text-xl">Task</span>
       </div>
+      <Link to="/users">Users</Link>
+      <Link to="/">Tasks</Link>
     </nav>
   );
 };
