@@ -17,9 +17,9 @@ const initialState: InitialState = {
             isCompleted: false,
             priority: 'High'
         }, {
-            id: "asdf",
+            id: "gjk",
             title: "Connect Github Repo",
-            description: "Create home page and routing",
+            description: "Create stage branch",
             dueDate: '2025-01-12',
             isCompleted: false,
             priority: 'Medium'
