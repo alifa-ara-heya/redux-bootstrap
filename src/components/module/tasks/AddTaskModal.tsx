@@ -43,16 +43,40 @@ import { addTask } from "@/redux/features/task/taskSlice";
 import type { ITask } from "@/types";
 import { selectUsers } from "@/redux/features/user/userSlice";
 import { useState } from "react";
+import { useCreateTasksMutation } from "@/redux/api/baseApi";
 
 export function AddTaskModal() {
-  const [open, setOpen] = useState(false);
-  const users = useAppSelector(selectUsers);
   const form = useForm();
+  const [open, setOpen] = useState(false);
+
+  // for local states
+  /*  
+  const users = useAppSelector(selectUsers);
+  
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
     dispatch(addTask(data as ITask));
+    setOpen(false);
+    form.reset();
+  }; */
+
+  // for RTK query
+  const [createTask, { data, isLoading, isError }] = useCreateTasksMutation();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const taskData = {
+      ...data,
+      isCompleted: false,
+    };
+
+    const res = await createTask(taskData).unwrap();
+
+    console.log("Inside submit function", res);
+
+    createTask(taskData);
+
     setOpen(false);
     form.reset();
   };
